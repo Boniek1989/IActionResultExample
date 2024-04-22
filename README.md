@@ -10,6 +10,6 @@ Constraints :
 3) bookid cannot be null or empty
 4) book id must be in range (0,1000>
 
-App sends respond with proper messages and status codes.
+App send response with proper messages and status codes.
 
 
