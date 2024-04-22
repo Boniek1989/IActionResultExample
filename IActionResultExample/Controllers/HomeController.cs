@@ -10,35 +10,40 @@ namespace IActionResultExample.Controllers
             //Book id should be supplied
             if (!Request.Query.ContainsKey("bookid"))
             {
-                Response.StatusCode = 400;
-                return Content("Book id is not supplied");
+                // Response.StatusCode = 400;
+                // return Content("Book id is not supplied");
+                return BadRequest("Book id is not supplied");
             }
             
             //Book id can't be empty
             if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
             {
-                Response.StatusCode = 400;
-                return Content("Book id cannot be null or empty");
+                //Response.StatusCode = 400;
+                // return Content("Book id cannot be null or empty");
+                return BadRequest("Book id cannot be null or empty");
             }
 
             //Book id should be between 1 to 1000
             int bookId = Convert.ToInt32(ControllerContext.HttpContext.Request.Query["bookid"]);
             if (bookId <= 0 )
             {
-                Response.StatusCode = 400;
-                return Content("Book id can't be less then or equal to zero");
+                //Response.StatusCode = 400;
+                //return Content("Book id can't be less then or equal to zero");
+                return BadRequest("Book id can't be less then or equal to zero");
             }
             if (bookId > 1000)
             {
-                Response.StatusCode = 400;
-                return Content("Book id cannot be greater than 1000");
+                //Response.StatusCode = 404;
+                //return Content("Book id cannot be greater than 1000");
+                return NotFound("Book id cannot be greater than 1000");
             }
 
             //isloggedin shall be true
             if (Convert.ToBoolean(Request.Query["isloggedin"]) == false)
             {
-                Response.StatusCode = 401;
-                return Content("User must be authenticated");
+                //Response.StatusCode = 401;
+                //return Content("User must be authenticated");
+                return Unauthorized("User must be authenticated");
             }
             
             Response.StatusCode = 200;
